@@ -1,0 +1,203 @@
+{
+  "common": {
+    "hop": "HOP",
+    "speed_dna": "Geschwindigkeit liegt in unserer DNA",
+    "get_started": "Jetzt starten",
+    "call_support": "HOP Support anrufen",
+    "email_office": "E-Mail an HOP Office",
+    "whatsapp": "WhatsApp"
+  },
+  "nav": {
+    "services": "Leistungen",
+    "pricing": "Preise",
+    "contact": "Kontakt",
+    "about": "Über uns",
+    "get_quote": "Angebot anfordern",
+    "head_office": "Hauptsitz Hamburg"
+  },
+  "hero": {
+    "badge": "Logistik der nächsten Generation",
+    "title_part1": "Logistik ohne",
+    "title_highlight": "Grenzen",
+    "title_part2": "hinaus",
+    "description": "Erleben Sie die Geschwindigkeit von HOP. Wir bieten technologiegetriebene Transportlösungen, die schnell, sicher und voll transparent sind.",
+    "cta_start": "Jetzt loslegen",
+    "cta_services": "Unsere Leistungen",
+    "fleet_tracking": "Intelligente Flottenverfolgung"
+  },
+  "stats": {
+    "clients": "Aktive Kunden",
+    "success_rate": "HOP Erfolgsquote",
+    "daily_shipments": "Tägliche Sendungen",
+    "distance": "Gesamtstrecke"
+  },
+  "sectors": {
+    "title_main": "Branchen",
+    "title_highlight": "die wir bedienen",
+    "subtitle": "Spezialisierte Logistiklösungen für jede Branche – präzise und zuverlässig.",
+    "messe": {
+      "title": "Messe & Event",
+      "desc": "Schneller und sicherer Transport von Messeausrüstung, Eventmaterialien und Bühnensystemen direkt zum Veranstaltungsort – präzise und termingerecht."
+    },
+    "construction": {
+      "title": "Bauwesen",
+      "desc": "Lieferung von Baumaschinen und -materialien direkt zur Baustelle – schnell, sicher und zuverlässig."
+    },
+    "documents": {
+      "title": "Dokumente & Pakete",
+      "desc": "Sichere und schnelle Zustellung von Dokumenten und Paketen mit vollständigem Tracking und garantierter Vertraulichkeit."
+    },
+    "retailers": {
+      "title": "Einzel- & Großhandel",
+      "desc": "Intelligente Logistiklösungen für Handel und Großhandel inklusive Lagerung, Distribution und Last-Mile-Zustellung."
+    },
+    "autoparts": {
+      "title": "Autoteile & Automotive",
+      "desc": "Professioneller Transport von Fahrzeugen, Ersatzteilen und Komponenten mit vollem Schutz und optimierten Routen."
+    }
+  },
+  "services": {
+    "title_main": "Services entwickelt für",
+    "title_highlight": "maximale Geschwindigkeit",
+    "road_title": "HOP Road",
+    "road_desc": "Schnelle FTL/LTL-Transporte in Europa mit KI-optimierten Routen.",
+    "express_title": "HOP Express",
+    "express_desc": "Zeitkritische Sendungen in Rekordzeit geliefert.",
+    "parcel_title": "HOP Parcel",
+    "parcel_desc": "Flexible Tür-zu-Tür-Optionen für jede Paketgröße.",
+    "global_title": "HOP Global",
+    "global_desc": "Nahtloser internationaler Transport über Grenzen hinweg.",
+    "docs_title": "HOP Docs",
+    "docs_desc": "Expertenabwicklung von Zoll- und Rechtsdokumenten.",
+    "secure_title": "HOP Secure",
+    "secure_desc": "Vollständiger Frachtschutz und Risikomanagement in Echtzeit."
+  },
+  "pricing": {
+    "title_main": "Einfache Preise für",
+    "title_highlight": "dynamische",
+    "subtitle": "Transparente Tarife ohne versteckte Gebühren.",
+    "most_popular": "Beliebtesten",
+    "per_shipment": "/Sendung",
+    "mini_desc": "Perfekt für kleine oder gelegentliche Sendungen.",
+    "midi_desc": "Beschleunigtes Wachstum für Ihr Team.",
+    "maxi_desc": "Hochgeschwindigkeitslogistik für große Volumina.",
+    "request_service": "Service anfragen",
+    "tiers": {
+      "courier": {
+        "name": "Kurierdienst",
+        "desc": "Schnelle Tür-zu-Tür-Zustellung für kleine Pakete und Dokumente.",
+        "features": [
+          "Same-Day & Next-Day Zustellung",
+          "Tür-zu-Tür-Service",
+          "Echtzeit-Tracking",
+          "Express-Dokumentenversand",
+          "Lokal & international"
+        ]
+      },
+      "ptl": {
+        "name": "Teilladung ",
+        "desc": "Kosteneffizienter Transport für mittelgroße Sendungen.",
+        "features": [
+          "Geteilter Laderaum",
+          "Optimierte Routen",
+          "Geplante Zustellungen",
+          "Lagerkonsolidierung",
+          "Flexible Abholung"
+        ]
+      },
+      "ftl": {
+        "name": "Komplettladung ",
+        "desc": "Dedizierte Lkw für große und priorisierte Fracht.",
+        "features": [
+          "Dediziertes Fahrzeug",
+          "Direktlieferung (ohne Stopps)",
+          "Hochsicherer Transport",
+          "Große Kapazitäten",
+          "Priorisierte Abwicklung"
+        ]
+      }
+    }
+  },
+  "footer": {
+    "description": "Logistik der nächsten Generation für eine schnelllebige Welt. Versenden Sie Ihre Fracht europaweit mit vollem Vertrauen.",
+    "solutions": "Lösungen",
+    "center": "HOP Center",
+    "get_in_touch": "Kontakt aufnehmen",
+    "legal": "Rechtliches",
+    "cookies": "Cookies",
+    "location": "Hamburg, Deutschland",
+    "links": {
+      "road_freight": "Straßentransport",
+      "express": "Express HOP",
+      "global": "Globale Logistik",
+      "docs": "Dokumentation",
+      "tracking": "Sendungsverfolgung",
+      "support": "Support",
+      "terms": "AGB",
+      "privacy": "Datenschutz"
+    },
+    "copyright": "© {{year}} HOP LOGISTICS. GESCHWINDIGKEIT NEU DEFINIERT."
+  },
+  "brand": {
+    "fast": "Schnell",
+    "secure": "Sicher",
+    "smart": "Smart",
+    "signature": "HOP Logistics • Europa"
+  },
+  "carousel": {
+    "badge": "Unsere Services",
+    "title": "Intelligente Transportlösungen",
+    "description": "Wir bieten schnelle, flexible und zuverlässige Logistik für jede Art von Fracht."
+  },
+  "contact": {
+    "subtitle": "Füllen Sie die folgenden Angaben aus – wir melden uns innerhalb von 24 Stunden.",
+    "labels": {
+      "first_name": "Vorname",
+      "father_name": "Vatersname",
+      "last_name": "Nachname",
+      "email": "E-Mail-Adresse",
+      "phone": "Telefonnummer",
+      "details": "Sendungsdetails"
+    },
+    "placeholders": {
+      "first_name": "Max",
+      "father_name": "Zweiter Name",
+      "last_name": "Mustermann",
+      "email": "max@example.com",
+      "details": "Beschreiben Sie Ihre Fracht..."
+    },
+    "processing": "Wird verarbeitet...",
+    "submit": "Anfrage senden",
+    "success_title": "Nachricht gesendet!",
+    "success_message": "Wir haben Ihre Anfrage erhalten und melden uns in Kürze.",
+    "success_cta": "Weitere Anfrage senden",
+    "error_message": "Senden fehlgeschlagen, bitte erneut versuchen."
+  },
+  "about": {
+    "badge": "Europäische Schnellspur-Logistik",
+    "title_prefix": "Geschwindigkeit liegt in",
+    "title_infix": "unserer",
+    "title_highlight": "DNA",
+    "p1": "HOP Logistics and Transport ist ein moderner Logistikpartner mit Fokus auf smarte, flexible und personalisierte Transportlösungen.",
+    "p2": "Wir schlagen die Brücke zwischen Kunden und Dienstleistern – effizient koordiniert und vertrauensvoll vernetzt.",
+    "p3": "Ob per Straße, See oder Luft: Wir bewegen jede Sendung mit Sorgfalt, Klarheit und kluger Planung.",
+    "mission": {
+      "title": "Unsere Mission",
+      "text": "Versand einfach und smart machen: HOP verbindet Kunden mit den passenden Lösungen – durch persönlichen Service, smarte Planung und vertrauensvolle Partnerschaften."
+    },
+    "vision": {
+      "title": "Unsere Vision",
+      "text": "Ein verlässlicher Logistikpartner sein – bekannt für smarte Lösungen, persönlichen Service und nahtlose Transporte auf jeder Route."
+    },
+    "values": {
+      "title": "Kernwerte",
+      "items": {
+        "smart_moves": { "title": "Smarte Entscheidungen", "desc": "Wir wählen die smartesten Lösungen – nicht nur die schnellsten." },
+        "personal_service": { "title": "Persönlicher Service", "desc": "Jeder Kunde erhält direkte Betreuung und Kommunikation." },
+        "trust": { "title": "Vertrauen & Transparenz", "desc": "Klarheit und Sicherheit in jedem Schritt des Versandprozesses." },
+        "reliability": { "title": "Zuverlässigkeit", "desc": "Wir halten unsere Zusagen und Termine zuverlässig ein." },
+        "flexibility": { "title": "Flexibilität", "desc": "Individuelle Lösungen für jeden Kunden und jede Fracht." }
+      }
+    }
+  }
+}

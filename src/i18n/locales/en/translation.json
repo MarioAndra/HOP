@@ -1,0 +1,203 @@
+{
+  "common": {
+    "hop": "HOP",
+    "speed_dna": "Speed is in our DNA",
+    "get_started": "Get Started",
+    "call_support": "Call HOP Support",
+    "email_office": "Email HOP Office",
+    "whatsapp": "WhatsApp"
+  },
+  "nav": {
+    "services": "Services",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "about": "About Us",
+    "get_quote": "Get a Quote",
+    "head_office": "Hamburg Head Office"
+  },
+  "hero": {
+    "badge": "Next-Gen Logistics",
+    "title_part1": "Smart logistics.",
+    "title_highlight": "Personal service.",
+    "title_part2": "That’s the HOP way.",
+    "description": "Experience the speed of HOP. We provide tech-driven transport solutions that are fast, secure, and fully transparent.",
+    "cta_start": "Start Hopping",
+    "cta_services": "Our Services",
+    "fleet_tracking": "Smart Fleet Tracking"
+  },
+  "stats": {
+    "clients": "Active Clients",
+    "success_rate": "HOP Success Rate",
+    "daily_shipments": "Daily Shipments",
+    "distance": "Total Distance"
+  },
+  "sectors": {
+    "title_main": "The Sectors",
+    "title_highlight": "we serve",
+    "subtitle": "Specialized logistics solutions designed for each industry sector with precision and reliability.",
+    "messe": {
+      "title": "Messe & Event",
+      "desc": "We provide fast and secure transport of exhibition equipment, event materials, and stage systems directly to event locations with high precision and timing."
+    },
+    "construction": {
+      "title": "Construction",
+      "desc": "We deliver construction equipment and building materials directly to the specified site with high speed, safety, and reliability."
+    },
+    "documents": {
+      "title": "Documents & Packages",
+      "desc": "Secure and fast delivery of documents and packages with full tracking and guaranteed confidentiality."
+    },
+    "retailers": {
+      "title": "Retailers & Wholesalers",
+      "desc": "Smart logistics solutions for retailers and wholesalers including warehousing, distribution, and last-mile delivery."
+    },
+    "autoparts": {
+      "title": "Autoparts & Automotive",
+      "desc": "Professional transport of vehicles, spare parts, and automotive components with full protection and optimized routes."
+    }
+  },
+  "services": {
+    "title_main": "Services designed for",
+    "title_highlight": "maximum speed",
+    "road_title": "HOP Road",
+    "road_desc": "Fast FTL/LTL across Europe with AI-optimized routes.",
+    "express_title": "HOP Express",
+    "express_desc": "Time-critical shipments delivered in record time.",
+    "parcel_title": "HOP Parcel",
+    "parcel_desc": "Flexible door-to-door options for any package size.",
+    "global_title": "HOP Global",
+    "global_desc": "Seamless international transport beyond borders.",
+    "docs_title": "HOP Docs",
+    "docs_desc": "Expert handling of customs and legal documentation.",
+    "secure_title": "HOP Secure",
+    "secure_desc": "Total cargo protection and real-time risk management."
+  },
+  "pricing": {
+    "title_main": "Simple pricing for",
+    "title_highlight": "fast moving",
+    "subtitle": "Transparent rates with no hidden fees.",
+    "most_popular": "Most Popular",
+    "per_shipment": "/shipment",
+    "mini_desc": "Perfect for small or occasional shipments.",
+    "midi_desc": "Accelerated growth for your team.",
+    "maxi_desc": "High-speed high-volume logistics.",
+    "request_service": "Request Service",
+    "tiers": {
+      "courier": {
+        "name": "Courier Service",
+        "desc": "Fast door-to-door delivery for small packages and documents.",
+        "features": [
+          "Same-day & next-day delivery",
+          "Door-to-door service",
+          "Real-time tracking",
+          "Express document shipping",
+          "Local & international coverage"
+        ]
+      },
+      "ptl": {
+        "name": "Partial Truckload",
+        "desc": "Cost-efficient transport for medium-sized shipments.",
+        "features": [
+          "Shared truck space",
+          "Optimized routing",
+          "Scheduled deliveries",
+          "Warehouse consolidation",
+          "Flexible pickup locations"
+        ]
+      },
+      "ftl": {
+        "name": "Full Truckload",
+        "desc": "Dedicated trucks for large-volume and high-priority cargo.",
+        "features": [
+          "Dedicated vehicle",
+          "Direct delivery (no stops)",
+          "High security transport",
+          "Large volume capacity",
+          "Priority logistics handling"
+        ]
+      }
+    }
+  },
+  "footer": {
+    "description": "Next-generation logistics for the fast-paced world. HOP your freight anywhere in Europe with total confidence.",
+    "solutions": "Solutions",
+    "center": "HOP Center",
+    "get_in_touch": "Get in Touch",
+    "legal": "Legal",
+    "cookies": "Cookies",
+    "location": "Hamburg, Germany",
+    "links": {
+      "road_freight": "Road Freight",
+      "express": "Express HOP",
+      "global": "Global Logistics",
+      "docs": "Documentation",
+      "tracking": "Tracking",
+      "support": "Support",
+      "terms": "Terms",
+      "privacy": "Privacy"
+    },
+    "copyright": "© {{year}} HOP LOGISTICS. SPEED REDEFINED."
+  },
+  "brand": {
+    "fast": "Fast",
+    "secure": "Secure",
+    "smart": "Smart",
+    "signature": "HOP Logistics • Europe"
+  },
+  "carousel": {
+    "badge": "Our Services",
+    "title": "Smart Transport Solutions",
+    "description": "We provide fast, flexible, and reliable logistics services for all types of cargo."
+  },
+  "contact": {
+    "subtitle": "Fill in the details below and our team will get back to you within 24 hours.",
+    "labels": {
+      "first_name": "First Name",
+      "father_name": "Father's Name",
+      "last_name": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "details": "Shipment Details"
+    },
+    "placeholders": {
+      "first_name": "John",
+      "father_name": "Middle",
+      "last_name": "Doe",
+      "email": "john@example.com",
+      "details": "Describe your cargo..."
+    },
+    "processing": "Processing...",
+    "submit": "Send Request",
+    "success_title": "Message Sent!",
+    "success_message": "We have received your request and will contact you very soon.",
+    "success_cta": "Send Another Request",
+    "error_message": "Failed to send message, please try again."
+  },
+  "about": {
+    "badge": "European Fast Track Logistics",
+    "title_prefix": "Speed is in",
+    "title_infix": "our",
+    "title_highlight": "DNA",
+    "p1": "HOP Logistics and Transport is a modern logistics partner focused on smart flexible and personalized transport solutions.",
+    "p2": "We act as the bridge between clients and transport providers simplifying shipping through efficient coordination and trusted connections.",
+    "p3": "Whether by road sea or air we move every shipment with care clarity and smart planning. At HOP every move is a smart move.",
+    "mission": {
+      "title": "Our Mission",
+      "text": "We make shipping simple and smart. HOP connects clients with the right transport solutions through personal service smart planning and trusted partnerships."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "text": "To become a trusted logistics partner known for smart solutions personal service and seamless transport across every route."
+    },
+    "values": {
+      "title": "Core Values",
+      "items": {
+        "smart_moves": { "title": "Smart Moves", "desc": "We choose the smartest solutions not just the fastest" },
+        "personal_service": { "title": "Personal Service", "desc": "Every client receives dedicated attention and direct communication" },
+        "trust": { "title": "Trust and Transparency", "desc": "Clarity and confidence at every step of the shipment process" },
+        "reliability": { "title": "Reliability", "desc": "We keep our promises and strictly adhere to deadlines" },
+        "flexibility": { "title": "Flexibility", "desc": "We provide tailored solutions for every client and every cargo" }
+      }
+    }
+  }
+}
