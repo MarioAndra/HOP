@@ -49,9 +49,8 @@ function ExpandButton({ icon: Icon, label, ariaLabel, href, onClick, isLink }) {
 
 export default function FloatingSidebar() {
   const { t } = useTranslation()
-  // --- إعدادات الشركة (تأكد من تعديل الأرقام هنا) ---
-  const companyPhoneNumber = "+49123456789"; // رقم الاتصال الهاتفي
-  const whatsappNumber = "49123456789";    // رقم الواتساب (بدون أصفار أو +)
+  const companyPhoneNumber = "+49123456789"; 
+  const whatsappNumber = "49123456789";    
   const navigate = useNavigate()
 
   return (
@@ -61,7 +60,6 @@ export default function FloatingSidebar() {
       initial="hidden"
       animate="visible"
     >
-      {/* 1. زر الاتصال الهاتفي: يفتح لوحة الاتصال في الهاتف مباشرة */}
       <ExpandButton 
         isLink={true}
         icon={Phone} 
@@ -70,16 +68,15 @@ export default function FloatingSidebar() {
         href={`tel:${companyPhoneNumber}`} 
       />
 
-      {/* 2. زر الإيميل: يفتح فورم التواصل داخل الموقع (Contact Form) */}
+      {/* نرسل 'general' كقيمة ثابتة ليتم ترجمتها ديناميكياً في صفحة الفورم */}
       <ExpandButton 
         isLink={false}
         icon={Mail} 
         label={t('common.email_office')} 
         ariaLabel={t('nav.get_quote')} 
-        onClick={() => navigate('/quote')} 
+        onClick={() => navigate('/quote', { state: { serviceType: 'general' } })} 
       />
 
-      {/* 3. زر الواتساب: يفتح محادثة مباشرة */}
       <ExpandButton 
         isLink={true}
         icon={MessageCircle} 

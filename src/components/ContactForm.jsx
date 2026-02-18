@@ -1,17 +1,33 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import { Send, User, Mail, MessageSquare, CheckCircle, Loader2 } from 'lucide-react'
+import { Send, Mail, MessageSquare, CheckCircle, Loader2, Package, MapPin } from 'lucide-react'
 import emailjs from '@emailjs/browser'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 
 export default function ContactForm() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const location = useLocation()
   const formRef = useRef();
   const [phone, setPhone] = useState('')
   const [isSending, setIsSending] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+
+  // استلام المفتاح (سواء كان 'general' أو مفتاح من صفحة الأسعار)
+  const rawServiceType = location.state?.serviceType || 'general';
+  
+  // التحقق مما إذا كان الطلب من صفحة الأسعار
+  const isFromPricing = rawServiceType !== 'general';
+
+  // معالجة الترجمة ديناميكياً لتتغير فوراً عند تغيير لغة الموقع
+  const displayServiceType = useMemo(() => {
+    if (rawServiceType === 'general' || !rawServiceType) {
+      return t('common.general_inquiry');
+    }
+    return t(rawServiceType);
+  }, [rawServiceType, i18n.language, t]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +38,7 @@ export default function ContactForm() {
     const publicKey = 'SK5NTr8r6V5KukeCX';   
 
     emailjs.sendForm(serviceID, templateID, formRef.current, publicKey)
-      .then((result) => {
+      .then(() => {
           setIsSuccess(true);
           setIsSending(false);
           setPhone('');
@@ -65,49 +81,97 @@ export default function ContactForm() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-7xl font-black text-gray-900 dark:text-white mb-4 tracking-tighter font-luxury">
+          <h1 className="text-5xl md:text-7xl font-black text-gray-900 dark:text-white mb-4 tracking-tighter font-luxury uppercase">
             {t('nav.get_quote')}
           </h1>
-          <p className="text-gray-500 dark:text-gray-400 font-medium font-modern">
-            {t('contact.subtitle')}
-          </p>
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-gray-500 dark:text-gray-400 font-medium font-modern leading-relaxed max-w-2xl text-center">
+              {t('contact.subtitle_speed')}
+            </p>
+            <motion.div className="inline-block">
+              <motion.span 
+                animate={{ scale: [1, 1.03, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="inline-flex items-center px-6 py-2 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-[#00a1e9]/30 text-[#00a1e9] font-black text-sm"
+              >
+                <span className="relative flex h-2 w-2 mr-3 ml-3">
+                  <span className="animate-ping absolute h-full w-full rounded-full bg-[#00a1e9] opacity-75"></span>
+                  <span className="relative h-2 w-2 rounded-full bg-[#00a1e9]"></span>
+                </span>
+                {t('contact.subtitle_free')}
+              </motion.span>
+            </motion.div>
+          </div>
         </motion.div>
 
         <motion.form 
           ref={formRef}
           onSubmit={handleSubmit}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
           className="space-y-6 bg-gray-50 dark:bg-[#111827] p-8 md:p-12 rounded-[3rem] border border-gray-100 dark:border-[#1f2937] shadow-2xl relative z-10"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">{t('contact.labels.first_name')}</label>
-              <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                <input required name="first_name" type="text" placeholder={t('contact.placeholders.first_name')} className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white" />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">{t('contact.labels.father_name')}</label>
-              <input name="father_name" type="text" placeholder={t('contact.placeholders.father_name')} className="w-full px-6 py-4 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white" />
-            </div>
-            <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">{t('contact.labels.last_name')}</label>
-              <input required name="last_name" type="text" placeholder={t('contact.placeholders.last_name')} className="w-full px-6 py-4 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white" />
+          {/* Service Type */}
+          <div className="space-y-2">
+            <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">
+              {t('contact.labels.service_type')}
+            </label>
+            <div className="relative">
+              <Package className="absolute left-4 top-1/2 -translate-y-1/2 text-[#00a1e9]" size={18} />
+              <input 
+                readOnly
+                name="service_type" 
+                type="text" 
+                value={displayServiceType} 
+                className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/50 dark:bg-[#0b0f1a]/50 border border-gray-100 dark:border-gray-800 text-gray-500 outline-none font-bold cursor-default shadow-inner font-modern" 
+              />
             </div>
           </div>
 
+          <AnimatePresence>
+            {isFromPricing && (
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 overflow-hidden"
+              >
+                <div className="space-y-2">
+                  <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">
+                    {t('contact.labels.pickup')} <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-[#00a1e9]" size={18} />
+                    <input required={isFromPricing} name="pickup_location" type="text" placeholder="e.g. Hamburg 20095" className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white font-modern" />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">
+                    {t('contact.labels.delivery')} <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-[#00a1e9]" size={18} />
+                    <input required={isFromPricing} name="delivery_location" type="text" placeholder="e.g. Berlin 10115" className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white font-modern" />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">{t('contact.labels.email')}</label>
+              <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">
+                {t('contact.labels.email')} <span className="text-red-500">*</span>
+              </label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                <input required name="user_email" type="email" placeholder={t('contact.placeholders.email')} className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white" />
+                <input required name="user_email" type="email" placeholder={t('contact.placeholders.email')} className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white font-modern" />
               </div>
             </div>
+
             <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">{t('contact.labels.phone')}</label>
+              <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">
+                {t('contact.labels.phone')}
+              </label>
               <input type="hidden" name="user_phone" value={phone} />
               <div className="phone-input-dark">
                 <PhoneInput
@@ -115,19 +179,33 @@ export default function ContactForm() {
                   value={phone}
                   onChange={setPhone}
                   containerClass="!w-full"
-                  inputClass="!w-full !h-[58px] !pl-14 !rounded-2xl !bg-white !dark:bg-[#0b0f1a] !border-transparent !focus:border-[#00a1e9] !text-gray-900 !dark:text-white !transition-all font-modern"
+                  inputClass="!w-full !h-[58px] !pl-14 !rounded-2xl !bg-white !dark:bg-[#0b0f1a] !border-transparent !focus:border-[#00a1e9] !text-gray-900 !dark:text-white font-modern"
                   buttonClass="!bg-transparent !border-none !rounded-l-2xl !pl-4 hover:!bg-gray-100 dark:hover:!bg-gray-800"
-                  dropdownClass="!bg-white dark:!bg-[#111827] !text-gray-900 dark:!text-white"
                 />
               </div>
             </div>
           </div>
 
+          {/* القسم المعدل: تفاصيل الشحنة / تفاصيل الاستفسار */}
           <div className="space-y-2">
-            <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">{t('contact.labels.details')}</label>
+            <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">
+              {isFromPricing 
+                ? t('contact.labels.shipment_details') 
+                : t('contact.labels.details')
+              } <span className="text-red-500">*</span>
+            </label>
             <div className="relative">
               <MessageSquare className="absolute left-4 top-4 text-gray-400" size={18} />
-              <textarea required name="message" rows="5" placeholder={t('contact.placeholders.details')} className="w-full pl-12 pr-6 py-4 rounded-[2rem] bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white resize-none font-modern"></textarea>
+              <textarea 
+                required 
+                name="message" 
+                rows="5" 
+                placeholder={isFromPricing 
+                  ? t('contact.placeholders.shipment_info') 
+                  : t('contact.placeholders.details')
+                } 
+                className="w-full pl-12 pr-6 py-4 rounded-[2rem] bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white resize-none font-modern"
+              ></textarea>
             </div>
           </div>
 
@@ -138,7 +216,7 @@ export default function ContactForm() {
             className={`w-full py-5 rounded-[2rem] text-white font-black text-lg shadow-xl flex items-center justify-center gap-3 transition-all mt-4 relative overflow-hidden font-modern uppercase tracking-widest ${
               isSending 
               ? 'bg-gray-400 cursor-not-allowed' 
-              : 'bg-[#00a1e9] hover:bg-[#1e73be] shadow-blue-500/25'
+              : 'bg-[#00a1e9] hover:bg-[#1e73be]'
             }`}
           >
             <AnimatePresence mode="wait">

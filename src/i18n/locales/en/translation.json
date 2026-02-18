@@ -3,9 +3,10 @@
     "hop": "HOP",
     "speed_dna": "Speed is in our DNA",
     "get_started": "Get Started",
-    "call_support": "Call HOP Support",
-    "email_office": "Email HOP Office",
-    "whatsapp": "WhatsApp"
+    "call_support": "Call",
+    "email_office": "E-mail",
+    "whatsapp": "WhatsApp",
+    "general_inquiry": "General Inquiry"
   },
   "nav": {
     "services": "Services",
@@ -21,7 +22,7 @@
     "title_highlight": "Personal service.",
     "title_part2": "That’s the HOP way.",
     "description": "Experience the speed of HOP. We provide tech-driven transport solutions that are fast, secure, and fully transparent.",
-    "cta_start": "Start Hopping",
+    "cta_start": "Get a Quote",
     "cta_services": "Our Services",
     "fleet_tracking": "Smart Fleet Tracking"
   },
@@ -81,7 +82,7 @@
     "mini_desc": "Perfect for small or occasional shipments.",
     "midi_desc": "Accelerated growth for your team.",
     "maxi_desc": "High-speed high-volume logistics.",
-    "request_service": "Request Service",
+    "request_service": "Get a Quote",
     "tiers": {
       "courier": {
         "name": "Courier Service",
@@ -150,26 +151,35 @@
     "description": "We provide fast, flexible, and reliable logistics services for all types of cargo."
   },
   "contact": {
-    "subtitle": "Fill in the details below and our team will get back to you within 24 hours.",
+   
+    "subtitle_speed": "Fill in the details and we'll HOP to your request at lightning speed!",
+    "subtitle_free": "Getting your quote is 100% FREE and non-binding.",
     "labels": {
+       "service_type": "Service Type",
       "first_name": "First Name",
       "father_name": "Father's Name",
       "last_name": "Last Name",
       "email": "Email Address",
       "phone": "Phone Number",
-      "details": "Shipment Details"
+      "pickup": "Pickup (City / Zip Code)",
+      "delivery": "Delivery (City / Zip Code)",
+      "shipment_details": "Shipment Details, Weight, Number",
+      "details": "Description"
+      
     },
     "placeholders": {
       "first_name": "John",
       "father_name": "Middle",
       "last_name": "Doe",
       "email": "john@example.com",
-      "details": "Describe your cargo..."
+      "details": "How can we help you? Describe your request here...",
+      "shipment_info": "e.g., type of goods, weight, number of packages and dimensions..."
+      
     },
     "processing": "Processing...",
     "submit": "Send Request",
     "success_title": "Message Sent!",
-    "success_message": "We have received your request and will contact you very soon.",
+    "success_message": "We have received your request and will get back to you immediately!",
     "success_cta": "Send Another Request",
     "error_message": "Failed to send message, please try again."
   },

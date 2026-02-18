@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, MapPin, Sun, Moon, AlignRight, Info, Globe } from 'lucide-react'
+import { Menu, X, MapPin, Sun, Moon, AlignRight, Info, Globe, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import logoLight from '../assets/file.svg'
 import logoDark from '../assets/file2.png'
+
+// استيراد الأعلام من المكتبة
+import * as Flags from 'country-flag-icons/react/3x2'
 
 // التابع الخاص بالأيقونة المتحركة (السهم والدبوس)
 const HopLogo = () => (
@@ -70,14 +73,12 @@ export default function Navbar() {
     setMobileOpen(false);
     setShowDropdown(false);
 
-    // إذا كان الرابط هو About Us، ننتقل لصفحة الأباوت
     if (item.id === 'about') {
       navigate('/about');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
-    // الروابط الأخرى التي تعتمد على الـ Scroll (Services & Contact)
     const targetId = item.href.replace('#', '');
     navigate('/');
     setTimeout(() => {
@@ -89,16 +90,20 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: t('nav.services'), href: '#services', id: 'services' },
+    { label: t('nav.services'), href: '#pricing', id: 'services' },
     { label: t('nav.about'), href: '#about', id: 'about' },
     { label: t('nav.contact'), href: '#contact', id: 'contact' },
   ]
 
+  // تعريف اللغات مع استخدام مكونات الأعلام من المكتبة
   const languages = [
-    { code: 'en', label: 'English' },
-    { code: 'de', label: 'Deutsch' },
-    { code: 'ar', label: 'Arabic' }
+    { code: 'en', label: 'English', FlagIcon: Flags.US },
+    { code: 'de', label: 'Deutsch', FlagIcon: Flags.DE },
+    { code: 'ar', label: 'العربية', FlagIcon: Flags.SA } // استخدمت SY لسوريا، يمكنك تغييرها لـ SA للسعودية
   ];
+
+  // جلب اللغة الحالية
+  const currentLanguage = languages.find(l => l.code === i18n.language) || languages[0];
 
   return (
     <motion.header
@@ -134,12 +139,16 @@ export default function Navbar() {
 
           <div className="h-6 w-[1px] bg-gray-200 dark:bg-gray-800 mx-1" />
 
+          {/* زر اختيار اللغة بالديسكتوب - يعرض العلم المختار حالياً */}
           <div className="relative">
             <button 
               onClick={() => setShowDropdown(!showDropdown)}
-              className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 text-[#00a1e9] transition-all"
+              className="flex items-center gap-2 p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all group"
             >
-              <AlignRight size={24} className={`${showDropdown ? 'rotate-90' : 'rotate-0'} transition-transform duration-300`} />
+              <div className="w-6 h-4 overflow-hidden rounded-sm shadow-sm transition-transform group-hover:scale-110">
+                <currentLanguage.FlagIcon title={currentLanguage.label} />
+              </div>
+              <ChevronDown size={14} className={`text-gray-400 transition-transform duration-300 ${showDropdown ? 'rotate-180' : ''}`} />
             </button>
             <AnimatePresence>
               {showDropdown && (
@@ -147,19 +156,22 @@ export default function Navbar() {
                   initial={{ opacity: 0, y: 10, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  className="absolute right-0 mt-3 w-64 bg-white dark:bg-[#111827] border border-gray-100 dark:border-[#1f2937] rounded-2xl shadow-2xl overflow-hidden z-50"
+                  className="absolute right-0 mt-3 w-48 bg-white dark:bg-[#111827] border border-gray-100 dark:border-[#1f2937] rounded-2xl shadow-2xl overflow-hidden z-50"
                 >
-                  <div className="bg-gray-50/50 dark:bg-gray-800/30 p-2">
+                  <div className="p-2 space-y-1">
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
                         onClick={() => changeLanguage(lang.code)}
-                        className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-bold transition-all ${
+                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold transition-all ${
                           i18n.language === lang.code 
-                          ? 'bg-[#00a1e9] text-white shadow-md' 
-                          : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                          ? 'bg-[#00a1e9] text-white' 
+                          : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                         }`}
                       >
+                        <div className="w-5 h-3 overflow-hidden rounded-[1px]">
+                          <lang.FlagIcon />
+                        </div>
                         {lang.label}
                       </button>
                     ))}
@@ -173,12 +185,7 @@ export default function Navbar() {
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
 
-          <button 
-            onClick={() => navigate('/quote')}
-            className="px-5 py-2 rounded-full bg-[#00a1e9] text-white text-sm font-black shadow-lg shadow-blue-500/20 hover:bg-gray-900 transition-all"
-          >
-            {t('nav.get_quote')}
-          </button>
+         
         </nav>
 
         {/* Mobile Menu Actions */}
@@ -186,8 +193,16 @@ export default function Navbar() {
            <button onClick={() => setIsDark(!isDark)} className="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-yellow-400 transition-all active:scale-90">
              {isDark ? <Sun size={20} /> : <Moon size={20} />}
            </button>
-           <button onClick={() => setMobileOpen(!mobileOpen)} className="p-1 text-[#00a1e9] transition-transform active:scale-90">
-              {mobileOpen ? <X size={32} /> : <AlignRight size={32} />}
+           
+           {/* في الموبايل يظهر العلم مكان الأيقونة عند الإغلاق */}
+           <button onClick={() => setMobileOpen(!mobileOpen)} className="p-1 text-[#00a1e9] transition-transform active:scale-90 flex items-center justify-center min-w-[44px]">
+              {mobileOpen ? (
+                <X size={32} />
+              ) : (
+                <div className="w-8 h-5 overflow-hidden rounded-sm shadow-md border border-gray-100 dark:border-gray-800">
+                  <currentLanguage.FlagIcon />
+                </div>
+              )}
            </button>
         </div>
       </div>
@@ -210,24 +225,26 @@ export default function Navbar() {
               
               <hr className="border-gray-100 dark:border-gray-800" />
               
-              {/* قسم اختيار اللغة المضاف للموبايل */}
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2 text-gray-400 font-black text-xs uppercase tracking-widest px-1">
                   <Globe size={14} />
                   <span>Select Language</span>
                 </div>
-                <div className="flex gap-2">
+                <div className="grid grid-cols-3 gap-2">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
                       onClick={() => changeLanguage(lang.code)}
-                      className={`flex-1 py-3 rounded-xl text-sm font-black uppercase transition-all ${
+                      className={`flex flex-col items-center gap-2 py-3 rounded-xl transition-all ${
                         i18n.language === lang.code 
                         ? 'bg-[#00a1e9] text-white shadow-lg shadow-blue-500/20' 
                         : 'bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
                       }`}
                     >
-                      {lang.code}
+                      <div className="w-8 h-5 overflow-hidden rounded-sm">
+                        <lang.FlagIcon />
+                      </div>
+                      <span className="text-[10px] font-black uppercase tracking-tighter">{lang.code}</span>
                     </button>
                   ))}
                 </div>
@@ -238,9 +255,7 @@ export default function Navbar() {
               <button onClick={() => { navigate('/about'); setMobileOpen(false); }} className="flex items-center gap-3 text-left text-xl font-black text-[#00a1e9] bg-transparent border-none outline-none">
                 <Info size={22} /> {t('nav.about')}
               </button>
-              <button onClick={() => { navigate('/quote'); setMobileOpen(false); }} className="w-full py-4 rounded-2xl bg-[#00a1e9] text-white text-center font-black text-lg shadow-lg shadow-blue-500/20">
-                {t('nav.get_quote')}
-              </button>
+              
             </div>
           </motion.div>
         )}

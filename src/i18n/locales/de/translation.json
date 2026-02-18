@@ -3,9 +3,10 @@
     "hop": "HOP",
     "speed_dna": "Geschwindigkeit liegt in unserer DNA",
     "get_started": "Jetzt starten",
-    "call_support": "HOP Support anrufen",
-    "email_office": "E-Mail an HOP Office",
-    "whatsapp": "WhatsApp"
+    "call_support": "Anrufen",
+    "email_office": "E-Mail",
+    "whatsapp": "WhatsApp",
+    "general_inquiry": "Allgemeine Anfrage"
   },
   "nav": {
     "services": "Leistungen",
@@ -17,9 +18,9 @@
   },
   "hero": {
     "badge": "Logistik der nächsten Generation",
-    "title_part1": "Logistik ohne",
-    "title_highlight": "Grenzen",
-    "title_part2": "hinaus",
+    "title_part1": "Intelligente Logistik.",
+    "title_highlight": "Persönlicher Service.",
+    "title_part2": "Das ist der HOP-Weg.",
     "description": "Erleben Sie die Geschwindigkeit von HOP. Wir bieten technologiegetriebene Transportlösungen, die schnell, sicher und voll transparent sind.",
     "cta_start": "Jetzt loslegen",
     "cta_services": "Unsere Leistungen",
@@ -81,7 +82,7 @@
     "mini_desc": "Perfekt für kleine oder gelegentliche Sendungen.",
     "midi_desc": "Beschleunigtes Wachstum für Ihr Team.",
     "maxi_desc": "Hochgeschwindigkeitslogistik für große Volumina.",
-    "request_service": "Service anfragen",
+    "request_service": "Angebot anfordern",
     "tiers": {
       "courier": {
         "name": "Kurierdienst",
@@ -150,26 +151,33 @@
     "description": "Wir bieten schnelle, flexible und zuverlässige Logistik für jede Art von Fracht."
   },
   "contact": {
-    "subtitle": "Füllen Sie die folgenden Angaben aus – wir melden uns innerhalb von 24 Stunden.",
+    "subtitle_speed": "Geben Sie Ihre Details ein und wir werden sofort für Sie losspringen",
+    "subtitle_free": "Ihre Anfrage ist zu 100% KOSTENLOS und unverbindlich.",
     "labels": {
+      "service_type": "Dienstleistungstyp",
       "first_name": "Vorname",
       "father_name": "Vatersname",
       "last_name": "Nachname",
       "email": "E-Mail-Adresse",
       "phone": "Telefonnummer",
-      "details": "Sendungsdetails"
+      "pickup": "Abholort (Stadt / PLZ)",
+      "delivery": "Lieferort (Stadt / PLZ)",
+      "shipment_details": "Sendungsdetails, Gewicht, Anzahl",
+      "details": "Beschreibung"
     },
     "placeholders": {
       "first_name": "Max",
       "father_name": "Zweiter Name",
       "last_name": "Mustermann",
       "email": "max@example.com",
-      "details": "Beschreiben Sie Ihre Fracht..."
+      "details": "Wie können wir Ihnen helfen?...",
+      "shipment_info": "z.B. Art der Ware, Gewicht, Anzahl der Paletten und Maße..."
+      
     },
     "processing": "Wird verarbeitet...",
     "submit": "Anfrage senden",
     "success_title": "Nachricht gesendet!",
-    "success_message": "Wir haben Ihre Anfrage erhalten und melden uns in Kürze.",
+    "success_message": "Wir haben Ihre Anfrage erhalten und werden uns sofort bei Ihnen melden!",
     "success_cta": "Weitere Anfrage senden",
     "error_message": "Senden fehlgeschlagen, bitte erneut versuchen."
   },

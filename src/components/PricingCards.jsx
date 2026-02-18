@@ -4,43 +4,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-const tiers = [
-  {
-    name: 'Courier Service',
-    desc: 'Fast door-to-door delivery for small packages and documents.',
-    features: [
-      'Same-day & next-day delivery',
-      'Door-to-door service',
-      'Real-time tracking',
-      'Express document shipping',
-      'Local & international coverage',
-    ],
-  },
-  {
-    name: 'Partial Truckload ',
-    desc: 'Cost-efficient transport for medium-sized shipments.',
-    features: [
-      'Shared truck space',
-      'Optimized routing',
-      'Scheduled deliveries',
-      'Warehouse consolidation',
-      'Flexible pickup locations',
-    ],
-    popular: true,
-  },
-  {
-    name: 'Full Truckload ',
-    desc: 'Dedicated trucks for large-volume and high-priority cargo.',
-    features: [
-      'Dedicated vehicle',
-      'Direct delivery (no stops)',
-      'High security transport',
-      'Large volume capacity',
-      'Priority logistics handling',
-    ],
-  },
-]
-
 function TierCard({ name, desc, features, popular, onSelect, isActive, onHover }) {
   const { t } = useTranslation()
   return (
@@ -58,7 +21,7 @@ function TierCard({ name, desc, features, popular, onSelect, isActive, onHover }
       }}
       transition={{
         type: 'tween',
-        ease: [0.22, 1, 0.36, 1], // ultra smooth curve
+        ease: [0.22, 1, 0.36, 1],
         duration: 0.4,
       }}
       viewport={{ once: true }}
@@ -73,12 +36,6 @@ function TierCard({ name, desc, features, popular, onSelect, isActive, onHover }
           : 'shadow-[0_8px_25px_rgba(0,0,0,0.08)]'}
       `}
     >
-      {popular && (
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
-          {t('pricing.most_popular')}
-        </div>
-      )}
-
       <div className="mb-8">
         <h3
           className={`text-xl font-black mb-3 ${
@@ -123,19 +80,23 @@ export default function PricingCards() {
   const { t } = useTranslation()
   const [activeCard, setActiveCard] = useState(null)
   const navigate = useNavigate()
+
   const tiers = [
     {
+      id: 'pricing.tiers.courier.name', // مفتاح الترجمة
       name: t('pricing.tiers.courier.name'),
       desc: t('pricing.tiers.courier.desc'),
       features: t('pricing.tiers.courier.features', { returnObjects: true }),
     },
     {
+      id: 'pricing.tiers.ptl.name', // مفتاح الترجمة
       name: t('pricing.tiers.ptl.name'),
       desc: t('pricing.tiers.ptl.desc'),
       features: t('pricing.tiers.ptl.features', { returnObjects: true }),
       popular: true,
     },
     {
+      id: 'pricing.tiers.ftl.name', // مفتاح الترجمة
       name: t('pricing.tiers.ftl.name'),
       desc: t('pricing.tiers.ftl.desc'),
       features: t('pricing.tiers.ftl.features', { returnObjects: true }),
@@ -155,13 +116,13 @@ export default function PricingCards() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          {tiers.map((t) => (
+          {tiers.map((tier) => (
             <TierCard
-              key={t.name}
-              {...t}
-              isActive={activeCard === t.name}
+              key={tier.id}
+              {...tier}
+              isActive={activeCard === tier.name}
               onHover={(name) => setActiveCard(name)}
-              onSelect={() => navigate('/quote')}
+              onSelect={() => navigate('/quote', { state: { serviceType: tier.id } })}
             />
           ))}
         </div>

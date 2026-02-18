@@ -61,8 +61,8 @@ export default function App() {
                   <>
                     <HeroSection />
                     <TruckCarousel />
-                    <Services />
                     <PricingCards />
+                    <Services />
                     <Stats />
                   </>
                 }
