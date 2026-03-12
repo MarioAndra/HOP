@@ -21,8 +21,8 @@
     "title_part1": "Intelligente Logistik.",
     "title_highlight": "Persönlicher Service.",
     "title_part2": "Das ist der HOP-Weg.",
-    "description": "Erleben Sie die Geschwindigkeit von HOP. Wir bieten technologiegetriebene Transportlösungen, die schnell, sicher und voll transparent sind.",
-    "cta_start": "Jetzt loslegen",
+    "description": "Erleben Sie die Geschwindigkeit von HOP. Wir bieten schnelle, effiziente und sichere Transportlösungen.",
+    "cta_start": "Angebot anfordern",
     "cta_services": "Unsere Leistungen",
     "fleet_tracking": "Intelligente Flottenverfolgung"
   },
@@ -30,7 +30,7 @@
     "clients": "Aktive Kunden",
     "success_rate": "HOP Erfolgsquote",
     "daily_shipments": "Tägliche Sendungen",
-    "distance": "Gesamtstrecke"
+    "distance": "Termintreue"
   },
   "sectors": {
     "title_main": "Branchen",
@@ -41,7 +41,7 @@
       "desc": "Schneller und sicherer Transport von Messeausrüstung, Eventmaterialien und Bühnensystemen direkt zum Veranstaltungsort – präzise und termingerecht."
     },
     "construction": {
-      "title": "Bauwesen",
+      "title": "Baugewerbe",
       "desc": "Lieferung von Baumaschinen und -materialien direkt zur Baustelle – schnell, sicher und zuverlässig."
     },
     "documents": {
@@ -85,37 +85,41 @@
     "request_service": "Angebot anfordern",
     "tiers": {
       "courier": {
-        "name": "Kurierdienst",
-        "desc": "Schnelle Tür-zu-Tür-Zustellung für kleine Pakete und Dokumente.",
+        "name": "Express Kurierdienst",
+        "desc": "Ultraschnelle Lieferung für kleinere Sendungen, die eine dringende Bearbeitung erfordern.",
         "features": [
-          "Same-Day & Next-Day Zustellung",
-          "Tür-zu-Tür-Service",
-          "Echtzeit-Tracking",
-          "Express-Dokumentenversand",
-          "Lokal & international"
-        ]
+    "Abholung innerhalb von 120 Minuten",
+    "Gesamtgewicht bis zu 1200 kg",
+    "Max. 8 oder 10 Europaletten",
+    "Gefahrguttransport",
+    "Neutrale Abholung/Zustellung",
+    "Be- und Entladung von oben möglich"
+  ]
       },
       "ptl": {
         "name": "Teilladung ",
-        "desc": "Kosteneffizienter Transport für mittelgroße Sendungen.",
+        "desc": "Kosteneffiziente Lösung für mittlere bis große Sendungen.",
         "features": [
-          "Geteilter Laderaum",
-          "Optimierte Routen",
-          "Geplante Zustellungen",
-          "Lagerkonsolidierung",
-          "Flexible Abholung"
-        ]
+    "Gesamtgewicht bis zu max. 12.000 kg",
+    "Bis zu 18 Europaletten (720x240x270 cm)",
+    "Dediziertes Fahrzeug",
+    "seitlich oder von Hinten und Beladung von oben",
+    "Neutrale Abholung/Zustellung",
+    "Hebebühne + Hubwagen"
+  ]
       },
       "ftl": {
         "name": "Komplettladung ",
-        "desc": "Dedizierte Lkw für große und priorisierte Fracht.",
+        "desc": "Maximale Kapazität für Ihre größten Logistikanforderungen.",
         "features": [
-          "Dediziertes Fahrzeug",
-          "Direktlieferung (ohne Stopps)",
-          "Hochsicherer Transport",
-          "Große Kapazitäten",
-          "Priorisierte Abwicklung"
-        ]
+    "Gesamtgewicht bis zu max. 24 T",
+    "Bis zu 33 Europaletten (1360x245x270 cm)",
+    "seitlich oder von Hinten und Beladung von oben",
+    "Neutrale Abholung/Zustellung",
+    "Kompletter dedizierter Transport",
+    "Optimiert für großvolumige Fracht",
+    "Lifting platform + pallet truck"
+  ]
       }
     }
   },
@@ -162,7 +166,7 @@
       "phone": "Telefonnummer",
       "pickup": "Abholort (Stadt / PLZ)",
       "delivery": "Lieferort (Stadt / PLZ)",
-      "shipment_details": "Sendungsdetails, Gewicht, Anzahl",
+      "shipment_details": "Beschreibung",
       "details": "Beschreibung"
     },
     "placeholders": {
@@ -171,17 +175,26 @@
       "last_name": "Mustermann",
       "email": "max@example.com",
       "details": "Wie können wir Ihnen helfen?...",
-      "shipment_info": "z.B. Art der Ware, Gewicht, Anzahl der Paletten und Maße..."
+      "shipment_info": "Wie können wir Ihnen helfen?..."
       
     },
     "processing": "Wird verarbeitet...",
     "submit": "Anfrage senden",
     "success_title": "Nachricht gesendet!",
     "success_message": "Wir haben Ihre Anfrage erhalten und werden uns sofort bei Ihnen melden!",
-    "success_cta": "Weitere Anfrage senden",
+    "success_cta": "Zur Startseite",
     "error_message": "Senden fehlgeschlagen, bitte erneut versuchen."
   },
   "about": {
+    "sidebar": {
+    "title": "Internationaler Transport und Logistik",
+    "description": "Smarte Bewegungen in ganz Europa und darüber hinaus."
+  },
+    "main_title": {
+    "part1": "Über",
+    "part2": "HOP Logistik",
+    "part3": "& Transport"
+  },
     "badge": "Europäische Schnellspur-Logistik",
     "title_prefix": "Geschwindigkeit liegt in",
     "title_infix": "unserer",
@@ -189,6 +202,7 @@
     "p1": "HOP Logistics and Transport ist ein moderner Logistikpartner mit Fokus auf smarte, flexible und personalisierte Transportlösungen.",
     "p2": "Wir schlagen die Brücke zwischen Kunden und Dienstleistern – effizient koordiniert und vertrauensvoll vernetzt.",
     "p3": "Ob per Straße, See oder Luft: Wir bewegen jede Sendung mit Sorgfalt, Klarheit und kluger Planung.",
+    "slogan": "Move Smart. Move HOP.",
     "mission": {
       "title": "Unsere Mission",
       "text": "Versand einfach und smart machen: HOP verbindet Kunden mit den passenden Lösungen – durch persönlichen Service, smarte Planung und vertrauensvolle Partnerschaften."

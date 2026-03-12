@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 
 // استيراد الصور من المسار المحلي الجديد
 import truck1 from '../assets/trucks/photo1.png'
@@ -9,25 +10,51 @@ import truck3 from '../assets/trucks/photo3.png'
 
 export default function TruckCarousel() {
   const { t, i18n } = useTranslation()
+  const navigate = useNavigate()
+
   const isRtl = i18n.language === 'ar'
   
   // تتبع العنصر النشط عند اللمس في الموبايل
   const [activeTouchIndex, setActiveTouchIndex] = useState(null);
 
   const truckImagesLocalized = [
-    { url: truck1, label: t('pricing.tiers.courier.name'), status: t('pricing.tiers.courier.name') },
-    { url: truck2, label: t('pricing.tiers.ftl.name'), status: t('pricing.tiers.ftl.name') },
-    { url: truck3, label: t('pricing.tiers.ptl.name'), status: t('pricing.tiers.ptl.name') },
+    { 
+      url: truck1, 
+      label: t('pricing.tiers.courier.name'), 
+      status: t('pricing.tiers.courier.name'),
+      serviceKey: 'pricing.tiers.courier.name'
+    },
+    { 
+      url: truck2, 
+      label: t('pricing.tiers.ftl.name'), 
+      status: t('pricing.tiers.ftl.name'),
+      serviceKey: 'pricing.tiers.ftl.name'
+    },
+    { 
+      url: truck3, 
+      label: t('pricing.tiers.ptl.name'), 
+      status: t('pricing.tiers.ptl.name'),
+      serviceKey: 'pricing.tiers.ptl.name'
+    },
   ]
 
   // إذا كانت اللغة عربية، نعكس ترتيب الصور لتبدأ من اليمين بشكل منطقي
   const displayImages = isRtl ? [...truckImagesLocalized].reverse() : truckImagesLocalized;
   
-  // تحديد اتجاه الحركة: بالعربي نتحرك من 0 إلى 50% بالموجب (من اليمين لليسار)
+  // تحديد اتجاه الحركة
   const animateX = isRtl ? ["0%", "50%"] : ["0%", "-50%"];
+
+  const handleClick = (serviceKey) => {
+    navigate('/quote', {
+      state: {
+        serviceType: serviceKey
+      }
+    })
+  }
 
   return (
     <section className="bg-white dark:bg-[#0b0f1a] py-20 overflow-hidden border-y border-gray-50 dark:border-[#1f2937]">
+      
       {/* عنوان القسم */}
       <div className="mx-auto max-w-7xl px-4 mb-12">
         <div className={`flex flex-col md:flex-row md:items-end justify-between gap-4 ${isRtl ? 'text-right' : 'text-left'}`}>
@@ -46,7 +73,6 @@ export default function TruckCarousel() {
       </div>
 
       {/* شريط الصور المتحرك */}
-      {/* نستخدم dir="ltr" هنا كحاوية تقنية فقط لضمان ثبات الإحداثيات، لكننا نتحكم بالصور برمجياً */}
       <div className="flex w-max" dir="ltr">
         <motion.div 
           className="flex gap-8 px-4"
@@ -57,19 +83,21 @@ export default function TruckCarousel() {
             ease: "linear" 
           }}
         >
-          {/* تكرار المصفوفة لضمان حركة مستمرة */}
+
           {[...displayImages, ...displayImages].map((item, index) => {
             const isActive = activeTouchIndex === index;
 
             return (
               <div 
                 key={index}
+                onClick={() => handleClick(item.serviceKey)}
                 onTouchStart={() => setActiveTouchIndex(index)}
                 onMouseEnter={() => setActiveTouchIndex(index)}
                 onMouseLeave={() => setActiveTouchIndex(null)}
-                className={`group relative w-[300px] md:w-[550px] h-[350px] rounded-[3rem] overflow-hidden border-4 transition-all duration-700 shadow-2xl bg-gray-100 dark:bg-gray-800 
+                className={`group relative w-[300px] md:w-[550px] h-[350px] rounded-[3rem] overflow-hidden border-4 transition-all duration-700 shadow-2xl bg-gray-100 dark:bg-gray-800 cursor-pointer
                   ${isActive ? 'border-[#00a1e9]' : 'border-transparent'}`}
               >
+
                 {/* الصورة */}
                 <img 
                   src={item.url} 
@@ -83,7 +111,7 @@ export default function TruckCarousel() {
                   ${isActive ? 'opacity-80' : 'opacity-70 group-hover:opacity-80'}`} 
                 />
                 
-                {/* نصوص الصورة - نعدل المحاذاة داخل الكرت حسب اللغة */}
+                {/* نصوص الصورة */}
                 <div className={`absolute bottom-10 z-20 ${isRtl ? 'right-10 text-right' : 'left-10 text-left'}`}>
                   <div className="text-[#38bdf8] font-black text-[10px] tracking-[0.4em] uppercase mb-1">
                     HOP Logistics 
@@ -93,7 +121,7 @@ export default function TruckCarousel() {
                   </div>
                 </div>
 
-                {/* شارة الحالة (Status Badge) */}
+                {/* شارة الحالة */}
                 <div className={`absolute top-8 z-20 flex items-center gap-2 bg-black/30 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 ${isRtl ? 'left-10' : 'right-10'}`}>
                   <div className="w-2.5 h-2.5 rounded-full bg-[#00a1e9] animate-pulse shadow-[0_0_8px_#00a1e9]" />
                   <span className="text-[10px] font-black text-white uppercase tracking-widest">
@@ -101,11 +129,13 @@ export default function TruckCarousel() {
                   </span>
                 </div>
 
-                {/* طبقة تفاعلية إضافية (Overlay) */}
+                {/* طبقة تفاعلية إضافية */}
                 <div className={`absolute inset-0 transition-colors duration-500 ${isActive ? 'bg-[#00a1e9]/5' : 'bg-transparent'}`} />
+
               </div>
             )
           })}
+
         </motion.div>
       </div>
     </section>

@@ -5,23 +5,20 @@ import 'react-phone-input-2/lib/style.css'
 import { Send, Mail, MessageSquare, CheckCircle, Loader2, Package, MapPin } from 'lucide-react'
 import emailjs from '@emailjs/browser'
 import { useTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export default function ContactForm() {
   const { t, i18n } = useTranslation()
   const location = useLocation()
+  const navigate = useNavigate()
   const formRef = useRef();
   const [phone, setPhone] = useState('')
   const [isSending, setIsSending] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
-  // استلام المفتاح (سواء كان 'general' أو مفتاح من صفحة الأسعار)
   const rawServiceType = location.state?.serviceType || 'general';
-  
-  // التحقق مما إذا كان الطلب من صفحة الأسعار
   const isFromPricing = rawServiceType !== 'general';
 
-  // معالجة الترجمة ديناميكياً لتتغير فوراً عند تغيير لغة الموقع
   const displayServiceType = useMemo(() => {
     if (rawServiceType === 'general' || !rawServiceType) {
       return t('common.general_inquiry');
@@ -39,9 +36,13 @@ export default function ContactForm() {
 
     emailjs.sendForm(serviceID, templateID, formRef.current, publicKey)
       .then(() => {
+          // --- التعديل هنا ---
           setIsSuccess(true);
           setIsSending(false);
           setPhone('');
+          // التمرير للأعلى فوراً عند النجاح لتظهر رسالة النجاح في المنتصف
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          // ------------------
       }, (error) => {
           console.log('Error:', error.text);
           setIsSending(false);
@@ -60,10 +61,18 @@ export default function ContactForm() {
           <div className="w-20 h-20 bg-green-100 dark:bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="text-green-500" size={40} />
           </div>
-          <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-4 font-luxury">{t('contact.success_title')}</h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-8">{t('contact.success_message')}</p>
+          <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-4 font-luxury">
+            {t('contact.success_title')}
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400 mb-8">
+            {t('contact.success_message')}
+          </p>
           <button 
-            onClick={() => setIsSuccess(false)}
+            onClick={() => {
+              setIsSuccess(false);
+              navigate('/'); 
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className="w-full py-4 rounded-2xl bg-[#00a1e9] text-white font-black hover:bg-gray-900 transition-all font-modern uppercase tracking-widest"
           >
             {t('contact.success_cta')}
@@ -109,7 +118,6 @@ export default function ContactForm() {
           onSubmit={handleSubmit}
           className="space-y-6 bg-gray-50 dark:bg-[#111827] p-8 md:p-12 rounded-[3rem] border border-gray-100 dark:border-[#1f2937] shadow-2xl relative z-10"
         >
-          {/* Service Type */}
           <div className="space-y-2">
             <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">
               {t('contact.labels.service_type')}
@@ -186,7 +194,6 @@ export default function ContactForm() {
             </div>
           </div>
 
-          {/* القسم المعدل: تفاصيل الشحنة / تفاصيل الاستفسار */}
           <div className="space-y-2">
             <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">
               {isFromPricing 

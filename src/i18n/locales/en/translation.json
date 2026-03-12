@@ -21,7 +21,7 @@
     "title_part1": "Smart logistics.",
     "title_highlight": "Personal service.",
     "title_part2": "That’s the HOP way.",
-    "description": "Experience the speed of HOP. We provide tech-driven transport solutions that are fast, secure, and fully transparent.",
+    "description": "Experience tExperience the speed of HOP. We offer fast, efficient, and safe transport solutions.",
     "cta_start": "Get a Quote",
     "cta_services": "Our Services",
     "fleet_tracking": "Smart Fleet Tracking"
@@ -30,7 +30,7 @@
     "clients": "Active Clients",
     "success_rate": "HOP Success Rate",
     "daily_shipments": "Daily Shipments",
-    "distance": "Total Distance"
+    "distance": "On-Time Delivery"
   },
   "sectors": {
     "title_main": "The Sectors",
@@ -85,37 +85,41 @@
     "request_service": "Get a Quote",
     "tiers": {
       "courier": {
-        "name": "Courier Service",
-        "desc": "Fast door-to-door delivery for small packages and documents.",
+        "name": "Express Courier Service",
+        "desc": "Ultra-fast delivery for smaller shipments requiring urgent handling.",
         "features": [
-          "Same-day & next-day delivery",
-          "Door-to-door service",
-          "Real-time tracking",
-          "Express document shipping",
-          "Local & international coverage"
+          "Pickup within 120 minutes",
+          "Total weight up to 1200 kg",
+          "Max. 8 or 10 Euro pallets",
+          "Transport of dangerous goods",
+          "Neutral pickup and delivery",
+          "Top-loading capability"
+          
         ]
       },
       "ptl": {
-        "name": "Partial Truckload",
-        "desc": "Cost-efficient transport for medium-sized shipments.",
+        "name": "Less than Truckload",
+        "desc": "Cost-effective solution for medium to large shipments.",
         "features": [
-          "Shared truck space",
-          "Optimized routing",
-          "Scheduled deliveries",
-          "Warehouse consolidation",
-          "Flexible pickup locations"
-        ]
+    "Total weight up to 12,000 kg",
+    "Up to 18 Euro pallets (720x240x270 cm)",
+    "Dedicated vehicle",
+    "Side, rear, and top loading",
+    "Neutral pickup and delivery",
+    "Lifting platform + pallet truck"
+  ]
       },
       "ftl": {
         "name": "Full Truckload",
-        "desc": "Dedicated trucks for large-volume and high-priority cargo.",
+        "desc": "Maximum capacity for your largest logistics requirements.",
         "features": [
-          "Dedicated vehicle",
-          "Direct delivery (no stops)",
-          "High security transport",
-          "Large volume capacity",
-          "Priority logistics handling"
-        ]
+    "Total weight up to 24 Tons",
+    "Up to 33 Euro pallets (1360x245x270 cm)",
+    "Side, rear, and top loading",
+    "Neutral pickup and delivery",
+    "Complete dedicated transport",
+    "Optimized for high-volume cargo"
+  ]
       }
     }
   },
@@ -151,11 +155,10 @@
     "description": "We provide fast, flexible, and reliable logistics services for all types of cargo."
   },
   "contact": {
-   
     "subtitle_speed": "Fill in the details and we'll HOP to your request at lightning speed!",
     "subtitle_free": "Getting your quote is 100% FREE and non-binding.",
     "labels": {
-       "service_type": "Service Type",
+      "service_type": "Service Type",
       "first_name": "First Name",
       "father_name": "Father's Name",
       "last_name": "Last Name",
@@ -163,9 +166,8 @@
       "phone": "Phone Number",
       "pickup": "Pickup (City / Zip Code)",
       "delivery": "Delivery (City / Zip Code)",
-      "shipment_details": "Shipment Details, Weight, Number",
+      "shipment_details": "Description",
       "details": "Description"
-      
     },
     "placeholders": {
       "first_name": "John",
@@ -173,17 +175,25 @@
       "last_name": "Doe",
       "email": "john@example.com",
       "details": "How can we help you? Describe your request here...",
-      "shipment_info": "e.g., type of goods, weight, number of packages and dimensions..."
-      
+      "shipment_info": "How can we help you? Describe your request here..."
     },
     "processing": "Processing...",
     "submit": "Send Request",
     "success_title": "Message Sent!",
     "success_message": "We have received your request and will get back to you immediately!",
-    "success_cta": "Send Another Request",
+    "success_cta": "Back to Home",
     "error_message": "Failed to send message, please try again."
   },
   "about": {
+    "sidebar": {
+    "title": "International Transport & Logistics",
+    "description": "Smart moves across Europe and beyond."
+  },
+    "main_title": {
+    "part1": "About",
+    "part2": "HOP Logistics",
+    "part3": "& Transport"
+  },
     "badge": "European Fast Track Logistics",
     "title_prefix": "Speed is in",
     "title_infix": "our",
@@ -191,6 +201,7 @@
     "p1": "HOP Logistics and Transport is a modern logistics partner focused on smart flexible and personalized transport solutions.",
     "p2": "We act as the bridge between clients and transport providers simplifying shipping through efficient coordination and trusted connections.",
     "p3": "Whether by road sea or air we move every shipment with care clarity and smart planning. At HOP every move is a smart move.",
+    "slogan": "Move Smart. Move HOP.",
     "mission": {
       "title": "Our Mission",
       "text": "We make shipping simple and smart. HOP connects clients with the right transport solutions through personal service smart planning and trusted partnerships."
@@ -202,11 +213,26 @@
     "values": {
       "title": "Core Values",
       "items": {
-        "smart_moves": { "title": "Smart Moves", "desc": "We choose the smartest solutions not just the fastest" },
-        "personal_service": { "title": "Personal Service", "desc": "Every client receives dedicated attention and direct communication" },
-        "trust": { "title": "Trust and Transparency", "desc": "Clarity and confidence at every step of the shipment process" },
-        "reliability": { "title": "Reliability", "desc": "We keep our promises and strictly adhere to deadlines" },
-        "flexibility": { "title": "Flexibility", "desc": "We provide tailored solutions for every client and every cargo" }
+        "smart_moves": {
+          "title": "Smart Moves",
+          "desc": "We choose the smartest solutions not just the fastest"
+        },
+        "personal_service": {
+          "title": "Personal Service",
+          "desc": "Every client receives dedicated attention and direct communication"
+        },
+        "trust": {
+          "title": "Trust and Transparency",
+          "desc": "Clarity and confidence at every step of the shipment process"
+        },
+        "reliability": {
+          "title": "Reliability",
+          "desc": "We keep our promises and strictly adhere to deadlines"
+        },
+        "flexibility": {
+          "title": "Flexibility",
+          "desc": "We provide tailored solutions for every client and every cargo"
+        }
       }
     }
   }

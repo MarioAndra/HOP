@@ -1,101 +1,208 @@
 import { motion } from 'framer-motion'
-import { Globe2, ShieldCheck, Zap, MapPin, Target, Eye, Star, CheckCircle2 } from 'lucide-react'
+import { 
+  Zap, ShieldCheck, Star, CheckCircle2, 
+  Globe2, Target, Link as LinkIcon, MousePointer2
+} from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
+// --- مكون خريطة العالم اللوجستية المتحركة ---
+const AnimatedLogisticsMap = () => {
+  const hubs = [
+    { id: 'germany', x: 52, y: 35, name: 'Germany', isMain: true },
+    { id: 'france', x: 42, y: 42, name: 'France' },
+    { id: 'italy', x: 52, y: 55, name: 'Italy' },
+    { id: 'spain', x: 30, y: 58, name: 'Spain' },
+  ];
+
+  const routes = [
+    { from: [52, 35], to: [42, 42] },
+    { from: [52, 35], to: [52, 55] },
+    { from: [52, 35], to: [30, 58] },
+  ];
+
+  return (
+    <div className="relative w-full h-48 mx-auto mb-8 flex items-center justify-center overflow-hidden rounded-2xl bg-blue-50/20 dark:bg-blue-900/5">
+      <svg viewBox="0 0 100 100" className="w-full h-full preserve-3d">
+        <path
+          d="M10,30 Q15,25 25,25 T40,20 T55,25 T70,20 T85,25 T95,35 V60 Q80,70 60,65 T40,75 T20,70 T5,60 Z"
+          fill="currentColor"
+          className="text-[#00a1e9] opacity-[0.08] dark:opacity-[0.12]"
+        />
+        {routes.map((route, i) => {
+          const pathD = `M ${route.from[0]} ${route.from[1]} Q ${(route.from[0] + route.to[0]) / 2 - 5} ${(route.from[1] + route.to[1]) / 2 - 5} ${route.to[0]} ${route.to[1]}`;
+          return (
+            <g key={`route-${i}`}>
+              <path d={pathD} fill="none" stroke="#00a1e9" strokeWidth="0.5" className="opacity-20" />
+              <motion.path
+                d={pathD}
+                fill="none"
+                stroke="#00a1e9"
+                strokeWidth="0.8"
+                strokeLinecap="round"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: [0, 0.5, 0] }}
+                transition={{ duration: 3, repeat: Infinity, delay: i * 0.8, ease: "easeInOut" }}
+              />
+              <motion.circle
+                r="1"
+                fill="#00a1e9"
+                initial={{ offsetDistance: "0%" }}
+                animate={{ offsetDistance: "100%" }}
+                transition={{ duration: 4, repeat: Infinity, delay: i * 0.8, ease: "linear" }}
+                style={{ offsetPath: `path('${pathD}')` }}
+              />
+            </g>
+          );
+        })}
+        {hubs.map((hub) => (
+          <g key={hub.id}>
+            <motion.circle
+              cx={hub.x}
+              cy={hub.y}
+              r={hub.isMain ? 4 : 2.5}
+              fill="#00a1e9"
+              initial={{ scale: 1, opacity: 0.4 }}
+              animate={{ scale: 1.8, opacity: 0 }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+            />
+            <circle cx={hub.x} cy={hub.y} r={hub.isMain ? 1.5 : 1} fill="#00a1e9" />
+          </g>
+        ))}
+      </svg>
+    </div>
+  )
+}
+
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 }
 
 export default function About() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isRtl = i18n.language === 'ar'
+
+  const values = [
+    { key: 'smart_moves', icon: Zap, num: '1' },
+    { key: 'personal_service', icon: Star, num: '2' },
+    { key: 'trust', icon: ShieldCheck, num: '3' },
+    { key: 'reliability', icon: CheckCircle2, num: '4' },
+    { key: 'flexibility', icon: Globe2, num: '5' }
+  ];
+
   return (
-    <div className="bg-white dark:bg-[#0b0f1a] min-h-screen font-sans">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 overflow-hidden">
-        <div className="mx-auto max-w-7xl relative z-10 text-center">
-          <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-500/10 text-[#00a1e9] text-[10px] font-black uppercase tracking-[0.2em] mb-8">
-              <MapPin size={14} /> {t('about.badge')}
-            </div>
-            <h1 className="text-6xl md:text-8xl font-black text-gray-900 dark:text-white mb-8 tracking-tighter leading-none uppercase">
-              {t('about.title_prefix')} <br/> {t('about.title_infix')} <span className="text-[#00a1e9]">{t('about.title_highlight')}</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-800 dark:text-[#f8fafc] max-w-5xl mx-auto font-bold leading-relaxed not-italic tracking-tight">
-              {t('about.p1')} {t('about.p2')} {t('about.p3')}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <div className={`relative min-h-screen bg-white dark:bg-[#0b0f1a] overflow-hidden ${isRtl ? 'text-right' : 'text-left'}`}>
+      
+      {/* الخلفية الضوئية */}
+      <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-0">
+        <div className="absolute top-[-10%] right-[-5%] w-[700px] h-[700px] bg-blue-400/10 blur-[120px] rounded-full" />
+      </div>
 
-      {/* Mission & Vision Section */}
-      <section className="py-24 bg-gray-50 dark:bg-[#111827]/50">
-        <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-12">
-          {/* Mission */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="p-10 rounded-[3.5rem] bg-white dark:bg-[#0b0f1a] border border-gray-100 dark:border-[#1f2937] shadow-2xl shadow-blue-500/5 transition-transform hover:scale-[1.02] duration-500"
-          >
-            <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-[#00a1e9] mb-8">
-              <Target size={36} />
-            </div>
-            <h3 className="text-3xl font-black mb-6 dark:text-white tracking-tight uppercase">{t('about.mission.title')}</h3>
-            <p className="text-gray-600 dark:text-[#94a3b8] font-bold leading-relaxed text-xl not-italic">
-              {t('about.mission.text')}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-40">
+        
+        {/* Header */}
+        <motion.header 
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-24 border-b border-gray-100 dark:border-gray-800 pb-12"
+        >
+          <h1 className="text-5xl md:text-7xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tighter uppercase">
+            {t('about.main_title.part1')} <span className="text-[#00a1e9]">{t('about.main_title.part2')}</span> <br/> 
+            <span className="text-gray-400 dark:text-gray-600">{t('about.main_title.part3')}</span>
+          </h1>
+          <div className="mt-6 flex items-center gap-4">
+            <span className="h-[2px] w-12 bg-[#00a1e9]"></span>
+            <p className="text-[#00a1e9] text-xl font-bold tracking-widest uppercase italic">
+              {t('about.slogan')}
             </p>
-          </motion.div>
+          </div>
+        </motion.header>
 
-          {/* Vision */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="p-10 rounded-[3.5rem] bg-white dark:bg-[#0b0f1a] border border-gray-100 dark:border-[#1f2937] shadow-2xl shadow-blue-500/5 transition-transform hover:scale-[1.02] duration-500"
-          >
-            <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-[#00a1e9] mb-8">
-              <Eye size={36} />
-            </div>
-            <h3 className="text-3xl font-black mb-6 dark:text-white tracking-tight uppercase">{t('about.vision.title')}</h3>
-            <p className="text-gray-600 dark:text-[#94a3b8] font-bold leading-relaxed text-xl not-italic">
-              {t('about.vision.text')}
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Core Values Section */}
-      <section className="py-24 bg-white dark:bg-[#0b0f1a] pb-32">
-        <div className="mx-auto max-w-7xl px-4 text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tighter uppercase">{t('about.values.title')}</h2>
-          <div className="w-24 h-2 bg-[#00a1e9] mx-auto mt-6 rounded-full" />
-        </div>
-        <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-3 lg:grid-cols-5 gap-8">
-          {[
-            { key: 'smart_moves', icon: Zap },
-            { key: 'personal_service', icon: Star },
-            { key: 'trust', icon: ShieldCheck },
-            { key: 'reliability', icon: CheckCircle2 },
-            { key: 'flexibility', icon: Globe2 }
-          ].map((value, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="p-8 rounded-[3rem] bg-gray-50 dark:bg-[#111827] border border-gray-100 dark:border-[#1f2937] text-center group hover:border-[#00a1e9] hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500"
-            >
-              <div className="w-12 h-12 mx-auto bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
-                <value.icon className="text-[#00a1e9]" size={28} />
+        <div className="grid md:grid-cols-12 gap-16">
+          <div className="md:col-span-8 space-y-20">
+            
+            {/* Mission */}
+            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
+              <div className="flex items-center gap-3 text-[#00a1e9] mb-4">
+                <Target size={32} strokeWidth={2.5} />
+                <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight uppercase">
+                  {t('about.mission.title')}
+                </h2>
               </div>
-              <h4 className="text-lg font-black dark:text-white mb-3 uppercase tracking-tight">{t(`about.values.items.${value.key}.title`)}</h4>
-              <p className="text-sm text-gray-500 dark:text-[#94a3b8] font-bold leading-relaxed">{t(`about.values.items.${value.key}.desc`)}</p>
-            </motion.div>
-          ))}
+              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bold leading-relaxed">
+                {t('about.mission.text')}
+              </p>
+            </motion.section>
+
+            {/* Vision */}
+            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
+              <div className="flex items-center gap-3 text-[#00a1e9] mb-4">
+                <Globe2 size={32} strokeWidth={2.5} />
+                <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight uppercase">
+                  {t('about.vision.title')}
+                </h2>
+              </div>
+              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bold leading-relaxed">
+                {t('about.vision.text')}
+              </p>
+            </motion.section>
+
+            {/* Who We Are */}
+            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="space-y-6">
+              <div className="flex items-center gap-3 text-[#00a1e9]">
+                <MousePointer2 size={24} className="rotate-90" />
+                <h3 className="text-lg font-black uppercase tracking-[0.2em]">Who We Are</h3>
+              </div>
+              <div className="text-lg text-gray-700 dark:text-gray-400 font-bold leading-relaxed space-y-4">
+                <p>{t('about.p1')}</p>
+                <div className="p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border-l-4 border-[#00a1e9] italic text-gray-500">
+                   {t('about.p2')} {t('about.p3')}
+                </div>
+              </div>
+            </motion.section>
+
+            {/* Values */}
+            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="space-y-12">
+              <div className="flex items-center gap-3 text-[#00a1e9]">
+                <LinkIcon size={24} />
+                <h3 className="text-lg font-black uppercase tracking-[0.2em]">Our Core Values</h3>
+              </div>
+              <div className="space-y-10">
+                {values.map((v, i) => (
+                  <div key={i} className="flex gap-6 items-start group">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-[#00a1e9] font-black text-xl border border-blue-100 dark:border-blue-800 group-hover:bg-[#00a1e9] group-hover:text-white transition-all duration-300">
+                      {v.num}
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-black text-gray-900 dark:text-white uppercase mb-2">
+                        {t(`about.values.items.${v.key}.title`)}
+                      </h4>
+                      <p className="text-lg text-gray-500 dark:text-gray-400 font-bold">
+                        {t(`about.values.items.${v.key}.desc`)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.section>
+          </div>
+
+          {/* Sidebar */}
+          <div className="md:col-span-4 hidden lg:block">
+            <div className="sticky top-32 p-10 rounded-[3rem] bg-gradient-to-b from-blue-50/50 to-white dark:from-blue-950/20 dark:to-transparent border border-blue-100/50 dark:border-blue-900/20 text-center backdrop-blur-sm">
+              <AnimatedLogisticsMap />
+              {/* النصوص المترجمة للـ Sidebar */}
+              <h5 className="text-sm font-black text-[#00a1e9] uppercase tracking-widest">
+                {t('about.sidebar.title')}
+              </h5>
+              <p className="mt-4 text-gray-500 font-bold text-sm leading-relaxed">
+                {t('about.sidebar.description')}
+              </p>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   )
 }
