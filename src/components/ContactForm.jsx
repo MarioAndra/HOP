@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useRef, useMemo } from 'react'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import { Send, Mail, MessageSquare, CheckCircle, Loader2, Package, MapPin } from 'lucide-react'
+import { Send, Mail, MessageSquare, CheckCircle, Loader2, Package, MapPin, Check } from 'lucide-react'
 import emailjs from '@emailjs/browser'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -19,12 +19,26 @@ export default function ContactForm() {
   const rawServiceType = location.state?.serviceType || 'general';
   const isFromPricing = rawServiceType !== 'general';
 
+  // استخراج المفتاح الصغير (courier, ptl, ftl) من مفتاح الترجمة الكامل
+  const serviceKey = useMemo(() => {
+    if (!isFromPricing) return null;
+    // إذا كان المسار pricing.tiers.courier.name سنأخذ courier
+    return rawServiceType.split('.')[2]; 
+  }, [rawServiceType, isFromPricing]);
+
   const displayServiceType = useMemo(() => {
     if (rawServiceType === 'general' || !rawServiceType) {
       return t('common.general_inquiry');
     }
     return t(rawServiceType);
   }, [rawServiceType, i18n.language, t]);
+
+  // جلب الخدمات الإضافية مباشرة من ملف الترجمة
+  const additionalServices = useMemo(() => {
+    if (!serviceKey) return [];
+    const list = t(`contact.services_list.${serviceKey}`, { returnObjects: true });
+    return Array.isArray(list) ? list : [];
+  }, [serviceKey, t]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,13 +50,10 @@ export default function ContactForm() {
 
     emailjs.sendForm(serviceID, templateID, formRef.current, publicKey)
       .then(() => {
-          // --- التعديل هنا ---
           setIsSuccess(true);
           setIsSending(false);
           setPhone('');
-          // التمرير للأعلى فوراً عند النجاح لتظهر رسالة النجاح في المنتصف
           window.scrollTo({ top: 0, behavior: 'smooth' });
-          // ------------------
       }, (error) => {
           console.log('Error:', error.text);
           setIsSending(false);
@@ -83,7 +94,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section className="min-h-screen pt-32 pb-20 bg-white dark:bg-[#0b0f1a] font-modern">
+    <section className="min-h-screen pt-32 pb-20 bg-white dark:bg-[#0b0f1a] font-modern text-left">
       <div className="mx-auto max-w-3xl px-4">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -118,6 +129,7 @@ export default function ContactForm() {
           onSubmit={handleSubmit}
           className="space-y-6 bg-gray-50 dark:bg-[#111827] p-8 md:p-12 rounded-[3rem] border border-gray-100 dark:border-[#1f2937] shadow-2xl relative z-10"
         >
+          {/* النوع */}
           <div className="space-y-2">
             <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">
               {t('contact.labels.service_type')}
@@ -148,7 +160,7 @@ export default function ContactForm() {
                   </label>
                   <div className="relative">
                     <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-[#00a1e9]" size={18} />
-                    <input required={isFromPricing} name="pickup_location" type="text" placeholder="e.g. Hamburg 20095" className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white font-modern" />
+                    <input required={isFromPricing} name="pickup_location" type="text" placeholder="PLZ / Stadt" className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white font-modern" />
                   </div>
                 </div>
 
@@ -158,7 +170,7 @@ export default function ContactForm() {
                   </label>
                   <div className="relative">
                     <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-[#00a1e9]" size={18} />
-                    <input required={isFromPricing} name="delivery_location" type="text" placeholder="e.g. Berlin 10115" className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white font-modern" />
+                    <input required={isFromPricing} name="delivery_location" type="text" placeholder="PLZ / Stadt" className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white font-modern" />
                   </div>
                 </div>
               </motion.div>
@@ -196,34 +208,57 @@ export default function ContactForm() {
 
           <div className="space-y-2">
             <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-2">
-              {isFromPricing 
-                ? t('contact.labels.shipment_details') 
-                : t('contact.labels.details')
-              } <span className="text-red-500">*</span>
+              {isFromPricing ? t('contact.labels.shipment_details') : t('contact.labels.details')} <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <MessageSquare className="absolute left-4 top-4 text-gray-400" size={18} />
               <textarea 
                 required 
                 name="message" 
-                rows="5" 
-                placeholder={isFromPricing 
-                  ? t('contact.placeholders.shipment_info') 
-                  : t('contact.placeholders.details')
-                } 
+                rows="4" 
+                placeholder={isFromPricing ? t('contact.placeholders.shipment_info') : t('contact.placeholders.details')} 
                 className="w-full pl-12 pr-6 py-4 rounded-[2rem] bg-white dark:bg-[#0b0f1a] border border-transparent focus:border-[#00a1e9] outline-none transition-all dark:text-white resize-none font-modern"
               ></textarea>
             </div>
           </div>
+
+          {/* الخدمات الإضافية - مترجمة ومؤتمتة */}
+          {isFromPricing && additionalServices.length > 0 && (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-4 pt-4 border-t border-gray-100 dark:border-gray-800"
+            >
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#00a1e9] ml-2">
+                {t('contact.additional_services')}
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {additionalServices.map((service, index) => (
+                  <label key={index} className="flex items-center gap-3 p-3.5 rounded-2xl bg-white dark:bg-[#0b0f1a] border border-gray-100 dark:border-gray-800 hover:border-[#00a1e9]/40 cursor-pointer transition-all group">
+                    <div className="relative flex items-center justify-center">
+                      <input 
+                        type="checkbox" 
+                        name="extra_services" 
+                        value={service}
+                        className="peer appearance-none w-5 h-5 rounded-md border-2 border-gray-200 dark:border-gray-700 checked:bg-[#00a1e9] checked:border-[#00a1e9] transition-all"
+                      />
+                      <Check className="absolute text-white opacity-0 peer-checked:opacity-100 transition-opacity" size={12} strokeWidth={4} />
+                    </div>
+                    <span className="text-[13px] font-bold text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors leading-tight">
+                      {service}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </motion.div>
+          )}
 
           <motion.button 
             disabled={isSending}
             whileHover={!isSending ? { scale: 1.02 } : {}}
             whileTap={!isSending ? { scale: 0.98 } : {}}
             className={`w-full py-5 rounded-[2rem] text-white font-black text-lg shadow-xl flex items-center justify-center gap-3 transition-all mt-4 relative overflow-hidden font-modern uppercase tracking-widest ${
-              isSending 
-              ? 'bg-gray-400 cursor-not-allowed' 
-              : 'bg-[#00a1e9] hover:bg-[#1e73be]'
+              isSending ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#00a1e9] hover:bg-gray-900'
             }`}
           >
             <AnimatePresence mode="wait">

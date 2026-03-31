@@ -155,6 +155,28 @@
     "description": "Wir bieten schnelle, flexible und zuverlässige Logistik für jede Art von Fracht."
   },
   "contact": {
+    "additional_services": "Dienstleistungen",
+  "services_list": {
+    "courier": [
+      "Beladehilfe durch Fahrer",
+      "Entladehilfe durch Fahrer",
+      "Hebebühne und Hubwagen (max. 200x150x200cm / 500kg)",
+      "Neutrale Abholung/Zustellung",
+      "Beladung von oben",
+      "Gefahrgut"
+    ],
+    "ptl": [
+      "Neutrale Abholung/Zustellung",
+      "Beladung von oben",
+      "Hebebühne und Hubwagen (max. 600x240x230cm / 5000kg)",
+      "Dediziertes Fahrzeug"
+    ],
+    "ftl": [
+      "Neutrale Abholung/Zustellung",
+      "Beladung von oben",
+      "Dediziertes Fahrzeug"
+    ]
+    },
     "subtitle_speed": "Geben Sie Ihre Details ein und wir werden sofort für Sie losspringen",
     "subtitle_free": "Ihre Anfrage ist zu 100% KOSTENLOS und unverbindlich.",
     "labels": {
